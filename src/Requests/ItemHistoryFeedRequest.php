@@ -2,14 +2,11 @@
 
 namespace AirtimePro\Requests;
 
-use AirtimePro\DataObjects\LiveInfo;
-use Saloon\Contracts\Response;
-
-class LiveInfoRequest extends BaseRequest
+class ItemHistoryFeedRequest extends Baserequest
 {
     public function resolveEndpoint(): string
     {
-        return '/live-info-v2';
+        return '/item-history-feed';
     }
 
     /**
@@ -19,11 +16,13 @@ class LiveInfoRequest extends BaseRequest
     {
         return [
             'timezone' => 'UTC',
+            'instance_id' => $this->instanceId,
         ];
     }
 
-    public function createDtoFromResponse(Response $response): LiveInfo
-    {
-        return LiveInfo::fromResponse($response);
+    public function __construct(
+        protected readonly ?int $instanceId = null,
+    ) {
+        //
     }
 }

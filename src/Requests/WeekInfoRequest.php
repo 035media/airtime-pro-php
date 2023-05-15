@@ -2,13 +2,8 @@
 
 namespace AirtimePro\Requests;
 
-use Saloon\Enums\Method;
-use Saloon\Http\Request;
-
-class WeekInfoRequest extends Request
+class WeekInfoRequest extends BaseRequest
 {
-    protected Method $method = Method::GET;
-
     public function resolveEndpoint(): string
     {
         return '/week-info';

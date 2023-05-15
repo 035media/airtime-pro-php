@@ -2,13 +2,8 @@
 
 namespace AirtimePro\Requests;
 
-use Saloon\Enums\Method;
-use Saloon\Http\Request;
-
-class ShowScheduleRequest extends Request
+class ShowSchedulesRequest extends BaseRequest
 {
-    protected Method $method = Method::GET;
-
     public function resolveEndpoint(): string
     {
         return '/show-schedules?show_id='.$this->id;

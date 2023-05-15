@@ -2,13 +2,8 @@
 
 namespace AirtimePro\Requests;
 
-use Saloon\Enums\Method;
-use Saloon\Http\Request;
-
-class StationMetadataRequest extends Request
+class StationMetadataRequest extends BaseRequest
 {
-    protected Method $method = Method::GET;
-
     public function resolveEndpoint(): string
     {
         return '/station-metadata';

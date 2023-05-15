@@ -2,20 +2,15 @@
 
 namespace AirtimePro\Requests;
 
-use Saloon\Enums\Method;
-use Saloon\Http\Request;
-
-class ShowsRequest extends Request
+class ShowsRequest extends BaseRequest
 {
-    protected Method $method = Method::GET;
-
     public function resolveEndpoint(): string
     {
-        if (! is_null($this->id)) {
-            return '/shows?show_id='.$this->id;
+        if (is_null($this->id)) {
+            return '/shows';
         }
 
-        return '/shows';
+        return '/shows?show_id='.$this->id;
     }
 
     public function __construct(

@@ -2,6 +2,9 @@
 
 namespace AirtimePro;
 
+use AirtimePro\Requests\LiveInfoRequest;
+use AirtimePro\Requests\WeekInfoRequest;
+use AirtimePro\Responses\BaseResponse;
 use Saloon\Http\Connector;
 
 class AirtimePro extends Connector
@@ -26,5 +29,15 @@ class AirtimePro extends Connector
         protected string $domain,
     ) {
         $this->domain = trim($domain);
+    }
+
+    public function liveInfo(): BaseResponse
+    {
+        return $this->send(new LiveInfoRequest);
+    }
+
+    public function weekInfo(): BaseResponse
+    {
+        return $this->send(new WeekInfoRequest);
     }
 }

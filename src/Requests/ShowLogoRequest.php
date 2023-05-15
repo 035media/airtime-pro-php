@@ -2,13 +2,8 @@
 
 namespace AirtimePro\Requests;
 
-use Saloon\Enums\Method;
-use Saloon\Http\Request;
-
-class ShowLogoRequest extends Request
+class ShowLogoRequest extends BaseRequest
 {
-    protected Method $method = Method::GET;
-
     public function resolveEndpoint(): string
     {
         return '/show-logo?id='.$this->id;
