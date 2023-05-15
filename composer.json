@@ -1,0 +1,45 @@
+{
+    "name": "035media/airtime-pro-php",
+    "description": "SDK for the Airtime Pro API written in PHP",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andréas Lundgren",
+            "email": "andreas@035media.se",
+            "role": "Developer"
+        }
+    ],
+    "homepage": "https://github.com/035media/airtime-pro-php",
+    "require": {
+        "php": "^8.1",
+        "sammyjo20/saloon": "^2.6"
+    },
+    "require-dev": {
+        "ergebnis/composer-normalize": "^2.31",
+        "laravel/pint": "^1.10",
+        "pestphp/pest": "^2.6"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "AirtimePro\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "AirtimePro\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "ergebnis/composer-normalize": true,
+            "pestphp/pest-plugin": true
+        },
+        "sort-packages": true
+    },
+    "scripts": {
+        "lint": "./vendor/bin/pint",
+        "test": "./vendor/bin/pest"
+    }
+}
