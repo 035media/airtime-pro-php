@@ -25,7 +25,7 @@ class Track
         protected readonly string $name,
         protected readonly array $metadata,
         protected readonly ?bool $media_item_played = null,
-        protected readonly ?int $record = null,
+        protected readonly ?string $record = null,
         protected readonly ?string $album_artwork_image = null,
     ) {
         //

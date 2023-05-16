@@ -26,15 +26,9 @@ class LiveInfo
         return new static($data['station'], $data['tracks'], $data['shows']);
     }
 
-    public function station(?string $key = null): Station
+    public function station(): Station
     {
-        $station = Station::fromData($this->station);
-
-        if (is_null($key)) {
-            return $station;
-        }
-
-        return $station->{$key};
+        return Station::fromData($this->station);
     }
 
     public function previousTrack(): ?Track
@@ -64,11 +58,14 @@ class LiveInfo
         return Track::fromData($this->tracks['next']);
     }
 
+    /**
+     * @return array<int, \AirtimePro\DataObjects\LiveInfo\Show>
+     */
     public function previousShows(): array
     {
         $shows = [];
 
-        foreach ($$this->shows['previous'] as $data) {
+        foreach ($this->shows['previous'] as $data) {
             $shows[] = Show::fromData($data);
         }
 
@@ -84,11 +81,14 @@ class LiveInfo
         return Show::fromData($this->shows['current']);
     }
 
+    /**
+     * @return array<int, \AirtimePro\DataObjects\LiveInfo\Show>
+     */
     public function nextShows(): array
     {
         $shows = [];
 
-        foreach ($$this->shows['next'] as $data) {
+        foreach ($this->shows['next'] as $data) {
             $shows[] = Show::fromData($data);
         }
 

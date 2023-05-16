@@ -1,22 +1,20 @@
 <?php
 
 use AirtimePro\AirtimePro;
-use AirtimePro\Exceptions\InvalidDomainException;
 
 it('can be instantiated with a valid domain', function () {
-    $airtimePro = AirtimePro::make('sourcefabric.airtime.pro');
-
-    expect($airtimePro)
-        ->toBeInstanceOf(AirtimePro::class);
+    expect(airtimePro())
+        ->toBeInstanceOf(AirtimePro::class)
+        ->domain->toBe('sourcefabric.airtime.pro')
+        ->resolveBaseUrl()->toBe('https://sourcefabric.airtime.pro/api');
 });
 
-it('trims domains when instantiated', function () {
-    $airtimePro = AirtimePro::make('  sourcefabric.airtime.pro    ');
-
-    expect($airtimePro->domain)
-        ->toBe('sourcefabric.airtime.pro');
-});
-
-it('throws an exception when given invalid domain', function () {
-    $airtimePro = AirtimePro::make('https://invalid.domain');
-})->throws(InvalidDomainException::class);
+it('sanitizes the domain', function (string $domain) {
+    expect(airtimePro($domain))
+        ->domain->toBe('sourcefabric.airtime.pro');
+})->with([
+    'whitespace' => '  sourcefabric.airtime.pro   ',
+    'unsecure scheme' => 'http://sourcefabric.airtime.pro',
+    'secure scheme' => 'https://sourcefabric.airtime.pro',
+    'trailing slash' => 'sourcefabric.airtime.pro/',
+]);

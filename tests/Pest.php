@@ -11,6 +11,10 @@
 |
 */
 
+use Saloon\Http\Faking\MockClient;
+use Saloon\Http\Faking\MockResponse;
+use Saloon\Http\PendingRequest;
+
 uses(AirtimePro\Tests\TestCase::class);
 
 /*
@@ -39,7 +43,18 @@ uses(AirtimePro\Tests\TestCase::class);
 |
 */
 
-// function something()
-// {
-//     // ..
-// }
+function airtimePro(string $domain = 'sourcefabric.airtime.pro'): AirtimePro\AirtimePro
+{
+    $mockClient = new MockClient([
+        '*' => function (PendingRequest $pendingRequest) {
+            $reflection = new ReflectionClass($pendingRequest->getRequest());
+
+            return MockResponse::fixture($reflection->getShortName());
+        },
+    ]);
+
+    $connector = \AirtimePro\AirtimePro::make($domain);
+    $connector->withMockClient($mockClient);
+
+    return $connector;
+}
