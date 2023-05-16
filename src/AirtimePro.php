@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AirtimePro;
 
 use AirtimePro\Requests\LiveInfoRequest;
@@ -9,6 +11,8 @@ use Saloon\Http\Connector;
 
 class AirtimePro extends Connector
 {
+    public readonly string $domain;
+
     public function resolveBaseUrl(): string
     {
         return "https://{$this->domain}/api";
@@ -25,10 +29,9 @@ class AirtimePro extends Connector
         ];
     }
 
-    public function __construct(
-        protected string $domain,
-    ) {
-        $this->domain = trim($domain);
+    public function __construct(string $domain)
+    {
+        $this->domain = filter_var($domain, FILTER_SANITIZE_URL);
     }
 
     public function liveInfo(): BaseResponse

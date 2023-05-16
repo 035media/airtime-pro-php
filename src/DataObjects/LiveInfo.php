@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace AirtimePro\DataObjects;
 
 use AirtimePro\DataObjects\LiveInfo\Show;
