@@ -32,7 +32,7 @@ class AirtimePro extends Connector
 
     public function __construct(string $domain)
     {
-        $this->sanitizeDomain($domain);
+        $this->domain = $this->sanitizeDomain($domain);
     }
 
     public function liveInfo(): LiveInfo
@@ -45,11 +45,11 @@ class AirtimePro extends Connector
         return $this->send(new WeekInfoRequest);
     }
 
-    private function sanitizeDomain(string $domain): void
+    private function sanitizeDomain(string $domain): string
     {
         $domain = filter_var($domain, FILTER_SANITIZE_URL);
         $domain = preg_replace(['@^https?\:\/\/@', '@\/$@'], '', $domain);
 
-        $this->domain = $domain;
+        return $domain;
     }
 }
